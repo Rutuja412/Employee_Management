@@ -10,11 +10,13 @@ namespace EmployeeWage
         public const int IS_FULL_TIME = 2;
         public const int EMP_RATE_PER_HOUR = 20;
         public const int NUM_OF_WORKING_DAYS = 20;
+        public const int MAX_HRS_IN_MONTH = 10;
         public static void EmployeeAttendance()
         {
-            int empHrs = 0, empWage = 0, totalEmpwage = 0;
-            for (int day = 0; day < NUM_OF_WORKING_DAYS; day++)
+            int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+            while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
             {
+                totalWorkingDays++;
                 Random random = new Random();
                 int empCheck = random.Next(0, 3);
                 switch (empCheck)
@@ -31,11 +33,11 @@ namespace EmployeeWage
                         empHrs = 0;
                         break;
                 }
-                empWage = empHrs * EMP_RATE_PER_HOUR;
-                totalEmpwage += empWage;
-                Console.WriteLine("Emp Wage:" + empWage);
+                 totalEmpHrs += empHrs;
+                 Console.WriteLine("Days : " + totalWorkingDays + "EmpHrs:" + empHrs);
             }
-            Console.WriteLine("Total Emp Wage :" + totalEmpwage);
+            int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
+            Console.WriteLine("Total Emp Wage :" + totalEmpWage);
         }
     }
 }
