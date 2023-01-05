@@ -6,7 +6,7 @@ namespace EmployeeWage
     {
         static void Main(string[] args)
         {
-            Employee.EmployeeAttendance();
+            Employee.ComputeEmpWage();
         }
     }
 }
