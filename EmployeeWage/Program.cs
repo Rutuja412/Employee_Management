@@ -6,7 +6,9 @@ namespace EmployeeWage
     {
         static void Main(string[] args)
         {
-            Employee.ComputeEmpWage();
+            Employee.ComputeEmpWage("Dmart",20,2,10);
+            Employee.ComputeEmpWage("Reliance", 10, 4, 20);
+
         }
     }
 }
