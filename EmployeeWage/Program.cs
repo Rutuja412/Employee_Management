@@ -6,8 +6,12 @@ namespace EmployeeWage
     {
         static void Main(string[] args)
         {
-            Employee.ComputeEmpWage("Dmart",20,2,10);
-            Employee.ComputeEmpWage("Reliance", 10, 4, 20);
+            Employee dMart = new Employee("DMart", 20, 2, 10);
+            Employee reliance = new Employee("Reliance", 10, 4, 20);
+            dMart.ComputeEmpWage();
+            Console.WriteLine(dMart.ToString());
+            reliance.ComputeEmpWage();
+            Console.WriteLine(reliance.ToString()); 
 
         }
     }

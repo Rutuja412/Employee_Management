@@ -8,10 +8,22 @@ namespace EmployeeWage
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
-        public static int ComputeEmpWage( string compony,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth)
+
+        private string compony;
+        private int empRatePerHour, numOfWorkingDays, maxHoursPerMonth, totalEmpWage;//global variable stored in heap memory
+        public Employee(string compony, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)//local variable stired in stack memory which is temporary
+        {
+            this.compony = compony;
+            this.empRatePerHour = empRatePerHour;
+            this.numOfWorkingDays = numOfWorkingDays;
+            this.maxHoursPerMonth=maxHoursPerMonth;
+            this.maxHoursPerMonth = maxHoursPerMonth;
+
+        }
+        public  void ComputeEmpWage( )
         {
             int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-            while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays)
+            while (totalEmpHrs <= this.maxHoursPerMonth && totalWorkingDays < this.numOfWorkingDays)
             {
                 totalWorkingDays++;
                 Random random = new Random();
@@ -31,12 +43,14 @@ namespace EmployeeWage
                         break;
                 }
                  totalEmpHrs += empHrs;
-                 Console.WriteLine(" Days : " + totalWorkingDays + "EmpHrs:" + empHrs);
+                 Console.WriteLine(" Days : " + totalWorkingDays + "Emp Hrs:" + empHrs);
             }
             int totalEmpWage = totalEmpHrs * empRatePerHour;
-            Console.WriteLine("Total Emp Wage for compony:" + compony +"is:"  +totalEmpWage);
-            return totalEmpWage;
-
+            Console.WriteLine("Total Emp Wage for compony:" + compony +" is:"  +totalEmpWage);
+        }
+        public string toString()
+        {
+            return "Total Employee wage for compony : " + this.compony + " is:  " + this.totalEmpWage;
         }
     }
 }
