@@ -6,51 +6,65 @@ namespace EmployeeWage
 {
     public class Employee
     {
-        public const int IS_PART_TIME = 1;
-        public const int IS_FULL_TIME = 2;
+        public const int Full_Time = 1;
+        public const int Part_Time = 2;
+        private int noOfCompany = 0;
+        private CompanyEmpWage[] companyEmpWageArray;
 
-        private string compony;
-        private int empRatePerHour, numOfWorkingDays, maxHoursPerMonth, totalEmpWage;//global variable stored in heap memory
-        public Employee(string compony, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)//local variable stired in stack memory which is temporary
+        public Employee()
         {
-            this.compony = compony;
-            this.empRatePerHour = empRatePerHour;
-            this.numOfWorkingDays = numOfWorkingDays;
-            this.maxHoursPerMonth=maxHoursPerMonth;
-            this.maxHoursPerMonth = maxHoursPerMonth;
+            this.companyEmpWageArray = new CompanyEmpWage[4];
 
         }
-        public  void ComputeEmpWage( )
+        public void addCompanyEmpWage(string company, int empRatePerHours, int numOfWorkingDays, int maxHoursPerMonth)
         {
-            int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-            while (totalEmpHrs <= this.maxHoursPerMonth && totalWorkingDays < this.numOfWorkingDays)
+            companyEmpWageArray[this.noOfCompany] = new CompanyEmpWage(company, empRatePerHours, numOfWorkingDays, maxHoursPerMonth);
+            noOfCompany++;
+        }
+        public void computeEmpWage()
+        {
+            for (int i = 0; i < noOfCompany; i++)
+            {
+                companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(this.companyEmpWageArray[i]));
+                Console.WriteLine(this.companyEmpWageArray[i].toString());
+            }
+        }
+        private int computeEmpWage(CompanyEmpWage companyEmpWage)
+        {
+            int totalEmpHr = 0, totalWorkingDays = 0, empHrs = 0;
+            while (totalEmpHr <= companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numOfWorkingDays)
             {
                 totalWorkingDays++;
+
                 Random random = new Random();
+
                 int empCheck = random.Next(0, 3);
+
                 switch (empCheck)
                 {
-                    case IS_PART_TIME:
-                        Console.WriteLine("Employee is Part Time");
+
+                    case Part_Time:
+
                         empHrs = 4;
                         break;
-                    case IS_FULL_TIME:
-                        Console.WriteLine("Employee is Full Time");
+
+                    case Full_Time:
+
                         empHrs = 8;
                         break;
+
                     default:
                         empHrs = 0;
-                        break;
+                            break;
+
                 }
-                 totalEmpHrs += empHrs;
-                 Console.WriteLine(" Days : " + totalWorkingDays + "Emp Hrs:" + empHrs);
+                totalEmpHr += empHrs;
+                Console.WriteLine("Day#:" + totalWorkingDays + "EmpHrs" + empHrs);
+
             }
-            int totalEmpWage = totalEmpHrs * empRatePerHour;
-            Console.WriteLine("Total Emp Wage for compony:" + compony +" is:"  +totalEmpWage);
-        }
-        public string toString()
-        {
-            return "Total Employee wage for compony : " + this.compony + " is:  " + this.totalEmpWage;
+
+            return totalEmpHr * companyEmpWage.empRatePerHours;
+
         }
     }
 }
